@@ -19,33 +19,39 @@ moveTo (function) Moves the current position to specified position
 */
 
 class List<T> {
-  storage: T[] = []
+  xs: T[] = []
   currPos: number = 0
 
   public append(val: T): void {
-    this.storage.push(val)
+    this.xs.push(val)
+  }
+
+  public addInFront(val: T): T[] {
+    this.xs.splice(0, 0, val)
+
+    return this.xs
   }
 
   public get head(): T | void {
-    return this.storage[0]
+    return this.xs[0]
   }
 
   public get len(): number {
-    return this.storage.length
+    return this.xs.length
   }
 
   public clear(): void {
-    this.storage = []
+    this.xs = []
   }
 
   public toString(): string {
-    return this.storage.toString()
+    return this.xs.toString()
   }
 
   public find(elem: T): number {
-    const len = this.storage.length
+    const len = this.xs.length
     for (let i = 0; i < len; i++) {
-      if (this.storage[i] === elem) {
+      if (this.xs[i] === elem) {
         return i
       }
     }
@@ -54,26 +60,26 @@ class List<T> {
   }
 
   remove(elem: T): T[] {
-    const i = this.storage.indexOf(elem)
+    const i = this.xs.indexOf(elem)
 
     if (i > 0) {
-      this.storage.splice(i, 1)
-      return this.storage
+      this.xs.splice(i, 1)
+      return this.xs
     }
 
-    return this.storage
+    return this.xs
   }
 
   public insert(elem: T, pos: number): void {
-    this.storage.splice(pos, 0, elem)
+    this.xs.splice(pos, 0, elem)
   }
 
   get hasNext() {
-    return this.currPos < this.storage.length
+    return this.currPos < this.xs.length
   }
 
   next() {
-    const temp = this.storage[this.currPos]
+    const temp = this.xs[this.currPos]
     this.currPos++
     return temp
   }

@@ -78,4 +78,18 @@ describe('List', () => {
       expect(xs.toString()).toBe('bread,soup')
     })
   })
+
+  describe('add in from of a list', () => {
+    it('should have an ability to add an item to in from of a list', () => {
+      const xs = new List()
+
+      xs.append('bread')
+      xs.append('milk')
+      xs.append('soup')
+
+      xs.addInFront('banana')
+
+      expect(xs.toString()).toBe('banana,bread,milk,soup')
+    })
+  })
 })
