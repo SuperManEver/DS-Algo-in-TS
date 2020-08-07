@@ -6,7 +6,7 @@ pos (property) Current position in list
 + clear (function) Clears all elements from list
 + toString (function) Returns string representation of list
 getElement (function) Returns element at current position
-insert (function) Inserts new element after existing element
++ insert (function) Inserts new element after existing element
 + append (function) Adds new element to end of list
 remove (function) Removes element from list
 front (function) Sets current position to first element of list
@@ -53,6 +53,21 @@ class List<T> {
     return -1
   }
 
+  remove(elem: T): T[] {
+    const i = this.storage.indexOf(elem)
+
+    if (i > 0) {
+      this.storage.splice(i, 1)
+      return this.storage
+    }
+
+    return this.storage
+  }
+
+  public insert(elem: T, pos: number): void {
+    this.storage.splice(pos, 0, elem)
+  }
+
   get hasNext() {
     return this.currPos < this.storage.length
   }
@@ -70,8 +85,8 @@ xs.append('bread')
 xs.append('milk')
 xs.append('soup')
 
-while (xs.hasNext) {
-  console.log(xs.next())
-}
+// while (xs.hasNext) {
+//   console.log(xs.next())
+// }
 
 export { List }

@@ -50,4 +50,32 @@ describe('List', () => {
 
     expect(i_not).toBe(-1)
   })
+
+  describe('insert', () => {
+    it('should have an ability to insert an item to list at particular position', () => {
+      const xs = new List()
+
+      xs.append('bread')
+      xs.append('milk')
+      xs.append('soup')
+
+      xs.insert('toasts', 1)
+
+      expect(xs.toString()).toBe('bread,toasts,milk,soup')
+    })
+  })
+
+  describe('remove', () => {
+    it('should have an ability to remove an item to list at particular position', () => {
+      const xs = new List()
+
+      xs.append('bread')
+      xs.append('milk')
+      xs.append('soup')
+
+      xs.remove('milk')
+
+      expect(xs.toString()).toBe('bread,soup')
+    })
+  })
 })
