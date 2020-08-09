@@ -23,6 +23,6 @@ export class Stack<T> {
   }
 
   get empty(): boolean {
-    return false
+    return this.top === 0
   }
 }
