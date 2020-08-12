@@ -27,7 +27,5 @@ export function infix2postfix(exp: string): string {
     result += `${first} ${last} ${currentOp}`
   }
 
-  console.log('RESULT: ', result)
-
   return result
 }
