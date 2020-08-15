@@ -23,3 +23,20 @@ test('find', () => {
   expect(res).not.toBeNull()
   expect(res && res.value).toBe('world')
 })
+
+test('insert', () => {
+  l.insert('mango', 'world')
+  expect(l.toString()).toBe('hello, world, mango, wassaby')
+})
+
+test('remove', () => {
+  l.remove('world')
+
+  expect(l.toString()).toBe('hello, wassaby')
+})
+
+test('remove, second way', () => {
+  l.remove2('world')
+
+  expect(l.toString()).toBe('hello, wassaby')
+})
