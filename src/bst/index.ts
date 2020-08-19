@@ -91,6 +91,22 @@ class BST<T> {
 
     return current ? current.data : null
   }
+
+  find(val: T): Node<T> | null {
+    var current = this.root
+
+    while (current && current.data !== val) {
+      if (val < current.data) {
+        current = current.left
+      } else {
+        current = current.right
+      }
+      if (current == null) {
+        return null
+      }
+    }
+    return current
+  }
 }
 
 var nums = new BST<number>()
@@ -107,3 +123,8 @@ nums.inOrder(nums.root)
 
 console.log(nums.getMin())
 console.log(nums.getMax())
+
+var found = nums.find(37)
+if (found) {
+  console.log(`found value ${found.data}`)
+}
