@@ -14,7 +14,7 @@ class Node<T> {
   }
 }
 
-class BST<T> {
+export class BST<T> {
   root: Node<T> | null = null
 
   insert(val: T): void {
@@ -92,6 +92,17 @@ class BST<T> {
     return current ? current.data : null
   }
 
+  getSmallest(node: Node<T>): Node<T> | null {
+    let root = node
+    let current: Node<T> | null = root
+
+    while (current && !(current.left === null)) {
+      current = current.left
+    }
+
+    return current
+  }
+
   find(val: T): Node<T> | null {
     var current = this.root
 
@@ -107,24 +118,78 @@ class BST<T> {
     }
     return current
   }
+
+  remove(val: T) {
+    if (this.root) {
+      this.root = this.removeNode(this.root, val)
+    }
+  }
+
+  removeNode(node: Node<T>, data: T): Node<T> | null {
+    if (node == null) {
+      return null
+    }
+
+    if (data === node.data) {
+      /**
+       *
+       * 1 case: leaf node
+       *
+       */
+      if (node.left === null && node.right === null) {
+        return null
+      }
+
+      /**
+       *
+       * 2 case: when node has only one child
+       *
+       */
+      if (node.left === null) {
+        return node.right
+      }
+
+      if (node.right === null) {
+        return node.left
+      }
+
+      /**
+       * 3 case: when node has 2 children
+       */
+
+      let tempNode = this.getSmallest(node.right)
+      if (tempNode) {
+        node.data = tempNode.data
+        node.right = this.removeNode(node.right, tempNode.data)
+
+        return node
+      }
+    } else if (data < node.data && node.left) {
+      node.left = this.removeNode(node.left, data)
+    } else if (node.right) {
+      node.right = this.removeNode(node.right, data)
+      return node
+    }
+
+    return node
+  }
 }
 
-var nums = new BST<number>()
-nums.insert(23)
-nums.insert(45)
-nums.insert(16)
-nums.insert(37)
-nums.insert(3)
-nums.insert(99)
-nums.insert(22)
-console.log('Inorder traversal: ')
+var bst = new BST<number>()
+bst.insert(23)
+bst.insert(45)
+bst.insert(16)
+bst.insert(37)
+bst.insert(3)
+bst.insert(99)
+bst.insert(22)
 
-nums.inOrder(nums.root)
+bst.inOrder(bst.root)
 
-console.log(nums.getMin())
-console.log(nums.getMax())
+bst.remove(16)
 
-var found = nums.find(37)
-if (found) {
-  console.log(`found value ${found.data}`)
-}
+console.log(
+  '---------------------------------------------------------------------'
+)
+
+bst.inOrder(bst.root)
