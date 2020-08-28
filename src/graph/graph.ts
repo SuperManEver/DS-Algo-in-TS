@@ -72,7 +72,7 @@ class Graph<T> {
   /**
    * Lookup a vertice's index and find its neighbors (convenience method)
    */
-  neighborsForVertex(vertex: T): T[] {
+  neighborsForVertex = (vertex: T): T[] => {
     return this.neighborsForIndex(this.indexOf(vertex))
   }
 
@@ -90,7 +90,7 @@ class Graph<T> {
     return this.edgesForIndex(this.indexOf(vertex))
   }
 
-  toString(): string {
+  toString = (): string => {
     let desc = ''
 
     for (let i = 0; i < this.vertexCount; i++) {

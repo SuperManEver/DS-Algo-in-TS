@@ -1,4 +1,6 @@
 import Graph from './graph'
+import dfs from './dfs'
+import { nodeToPath } from './utils'
 
 const cityGraph: Graph<string> = new Graph([
   'Seattle',
@@ -46,3 +48,19 @@ cityGraph.addEdgeByVertices('Philadelphia', 'Washington')
 
 console.log(cityGraph.toString())
 console.log(cityGraph.neighborsForVertex('Dallas'))
+
+console.log('-------------------------------------------')
+
+const dfsResult = dfs<string>(
+  'Seattle',
+  (nodeName: string) => nodeName === 'Miami',
+  cityGraph.neighborsForVertex
+)
+
+if (dfsResult) {
+  const path = nodeToPath<string>(dfsResult)
+  console.log('Path from Boston to Miami:')
+  console.log(path)
+} else {
+  console.log('No solution found using depth-first search!')
+}
