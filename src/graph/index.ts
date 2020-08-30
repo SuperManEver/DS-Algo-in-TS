@@ -1,5 +1,5 @@
 import Graph from './graph'
-import dfs from './dfs'
+import bfs from './bfs'
 import { nodeToPath } from './utils'
 
 const cityGraph: Graph<string> = new Graph([
@@ -51,14 +51,14 @@ console.log(cityGraph.neighborsForVertex('Dallas'))
 
 console.log('-------------------------------------------')
 
-const dfsResult = dfs<string>(
+const result = bfs<string>(
   'Seattle',
   (nodeName: string) => nodeName === 'Miami',
   cityGraph.neighborsForVertex
 )
 
-if (dfsResult) {
-  const path = nodeToPath<string>(dfsResult)
+if (result) {
+  const path = nodeToPath<string>(result)
   console.log('Path from Boston to Miami:')
   console.log(path)
 } else {
