@@ -1,4 +1,5 @@
 import { Queue } from './queue'
+import Node from '../graph/node'
 
 class Patient {
   name: string
@@ -10,11 +11,15 @@ class Patient {
   }
 }
 
-class PriorityQueue<T extends Patient> extends Queue<T> {
+interface Comparable<T> {
+  lowerThan(other: T): boolean
+}
+
+class PriorityQueue<T extends Comparable<T>> extends Queue<T> {
   public dequeue(): T | undefined {
     let top: T | undefined = this.dataStore[0]
     for (let i = 0; i < this.dataStore.length; i++) {
-      if (this.dataStore[i].priority > top.priority) {
+      if (top.lowerThan(this.dataStore[i])) {
         top = this.dataStore[i]
       }
     }
